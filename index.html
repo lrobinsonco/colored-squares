@@ -22,10 +22,13 @@
 		<table>
 
 		</table>
+		<div class="controls">
+			<input id="color" type="color"> Select color
+			<button id="reset">Reset Board</button>
+		</div>
 		<script src="jquery-3.1.1.min.js"></script>
 		<script>
 			var boxes = []
-			var colors = ['red', 'green', 'blue', 'purple', 'PaleGoldenRod', 'MintCream']
 			var id = 0
 			var size = 50
 			var next
@@ -43,7 +46,7 @@
 
 			function directionToMove() {
 				var directions = [-50, 1, 50, -1]
-				return directions[getRandom(0, 3)]
+				return directions[getRandom(0, 4)]
 			}
 
 			for(var i = 0; i < size; i = i + 1) {
@@ -58,7 +61,9 @@
 			}
 
 			$('table').on('click', 'td', function() {
-				$(this).css('background-color', 'blue')
+				var color = $('#color').val()
+				console.log(color)
+				$(this).css('background-color', color)
 				var myId = $(this).attr('id')
 				var direction = directionToMove()
 				var next = Number(direction) + Number(myId)
@@ -67,6 +72,8 @@
 					setTimeout(function() {
 						click(next)
 					}, speed)
+				} else {
+					alert('finished drawing!')
 				}
 			})
 
@@ -75,6 +82,10 @@
 
 				el.click()
 			}
+
+			$('#reset').on('click', function() {
+				$('td').css('background-color', 'white')
+			})
 		</script>
 	</body>
 </html>
