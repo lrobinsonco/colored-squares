@@ -28,64 +28,8 @@
 		</div>
 		<script src="jquery-3.1.1.min.js"></script>
 		<script>
-			var boxes = []
-			var id = 0
-			var size = 50
-			var next
-			var speed = 1
+    // Our code will go here
 
-			function createBox(id) {
-				var box = $('<td>')
-				box.attr('id', id)
-				return box
-			}
-
-			function getRandom(low, max) {
-				return Math.floor(Math.random() * (max - low) + low)
-			}
-
-			function directionToMove() {
-				var directions = [-50, 1, 50, -1]
-				return directions[getRandom(0, 4)]
-			}
-
-			for(var i = 0; i < size; i = i + 1) {
-				var tr = $('<tr>')
-				tr.attr('row', i)
-				$('table').append(tr)
-				for(var j = 0; j < size; j = j + 1) {
-					var box = createBox(id)
-					id = id + 1
-					tr.append(box)
-				}
-			}
-
-			$('table').on('click', 'td', function() {
-				var color = $('#color').val()
-				console.log(color)
-				$(this).css('background-color', color)
-				var myId = $(this).attr('id')
-				var direction = directionToMove()
-				var next = Number(direction) + Number(myId)
-
-				if(next >= 0 && next <= id) {
-					setTimeout(function() {
-						click(next)
-					}, speed)
-				} else {
-					alert('finished drawing!')
-				}
-			})
-
-			function click(next) {
-				var el = $('#' + next)
-
-				el.click()
-			}
-
-			$('#reset').on('click', function() {
-				$('td').css('background-color', '')
-			})
 		</script>
 	</body>
 </html>
