@@ -1,5 +1,6 @@
 var colorsNode = document.querySelector('.colors')
 var cellNode = document.querySelector('.grid')
+var whiteNode = document.querySelector('.colors > .white')
 var selectedColor = 'white'
 
 colorsNode.addEventListener('click', function (e) {
@@ -10,12 +11,14 @@ colorsNode.addEventListener('click', function (e) {
   }
 })
 
-cellNode.addEventListener('click', function(e) {
-  if(e.target.classList.contains('cell')) {
+cellNode.addEventListener('mouseover', function(e) {
+  if(e.target.classList.contains('cell') && e.buttons === 1) {
     removeOtherColors(e.target)
     e.target.classList.toggle(selectedColor)
   }
 })
+
+whiteNode.classList.add('selected')
 
 function removeOtherColors(el) {
   el.classList.remove('red', 'blue', 'green', 'black', 'white')
