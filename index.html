@@ -77,6 +77,14 @@
       .selected {
         outline: 3px dotted black;
       }
+
+      .saved-canvas-item {
+        cursor: pointer;
+      }
+
+      .hidden {
+        display: none;
+      }
 		</style>
 	</head>
 	<body>
@@ -96,14 +104,19 @@
         <div class="cell royalblue" data-color="royalblue"></div>
         <div class="cell brown" data-color="brown"></div>
       </section>
-      <section class="row submit">
+      <section class="row submit hidden">
         <form>
           <input type="text" placeholder="name of your art" id="art-name">
           <button id="save">save</button>
           <button id="clear">clear</button>
+          <button id="get-saved">Get Saved</button>
         </form>
       </section>
+      <section class="row saved">
+        <ul></ul>
+      </section>
 		</main>
+    <script src="saved.js"></script>
     <script>
       var gridSize = 50
       var gridNode = document.querySelector('section.grid')
@@ -127,6 +140,8 @@
 
       if(self.fetch){
         var form = document.querySelector('#save')
+        var getSavedNode = document.querySelector('#get-saved')
+        var savedCanvases
 
         form.addEventListener('click', function(e) {
           e.preventDefault()
@@ -157,6 +172,56 @@
           })
         })
 
+        function restoreCanvas(data) {
+          var name = data.name
+          var colors = data.colors
+          var cells = document.querySelectorAll('.grid .cell')
+          var nameNode = document.querySelector('#art-name')
+
+          for(var i = 0; i < cells.length; i++) {
+            cells[i].classList.add(colors[i])
+          }
+
+          nameNode.value = name
+        }
+
+        getSavedNode.addEventListener('click', function(e) {
+          e.preventDefault()
+
+          savedCanvases = saved
+
+          displayNames()
+        })
+
+        function displayNames() {
+          var ulNode = document.querySelector('section.saved > ul')
+          var liNode
+
+          console.log(savedCanvases)
+
+          for(var i = 0; i < savedCanvases.length; i++) {
+            liNode = document.createElement('li')
+            liNode.textContent = savedCanvases[i].name
+            liNode.classList.add('saved-canvas-item')
+            liNode.setAttribute('data-index', i)
+            ulNode.appendChild(liNode)
+          }
+        }
+
+        var ulNode = document.querySelector('section.saved > ul')
+        ulNode.addEventListener('click', function(e) {
+          var cells = document.querySelectorAll('.grid .cell')
+
+          for(var i = 0; i < cells.length; i++) {
+            removeOtherColors(cells[i])
+            cells[i].classList.add('white');
+          }
+
+          if(e.target.classList.contains('saved-canvas-item')) {
+            var index = e.target.attributes['data-index'].nodeValue
+            restoreCanvas(savedCanvases[index])
+          }
+        })
       }
     </script>
     <script src="main.js"></script>

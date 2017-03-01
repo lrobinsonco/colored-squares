@@ -14,6 +14,9 @@ var selectedColor = 'white'
 // We need to have the clear button to clear the canvas later
 var clear = document.querySelector('#clear')
 
+// Grab the secret hidden form
+// var formSectionNode = document.querySelector('section.submit')
+
 /** Event Listeners **/
 // Select the color that we want to paint with
 colorsNode.addEventListener('click', function (e) {
@@ -68,3 +71,6 @@ function removeOtherSelected() {
 /** Main logic **/
 // Select the white color as it is the default
 whiteNode.classList.add('selected')
+
+// Unhide the secret section
+// formSectionNode.classList.remove('hidden')
