@@ -11,12 +11,6 @@ var whiteNode = document.querySelector('.colors > .white')
 // Lets set the default color to white
 var selectedColor = 'white'
 
-// We need to have the clear button to clear the canvas later
-var clear = document.querySelector('#clear')
-
-// Grab the secret hidden form
-var formSectionNode = document.querySelector('section.submit')
-
 /** Event Listeners **/
 // Select the color that we want to paint with
 colorsNode.addEventListener('click', function (e) {
@@ -43,16 +37,6 @@ cellNode.addEventListener('mouseover', function(e) {
   }
 })
 
-// Clear the canvas when we click the clear button
-clear.addEventListener('click', function(e) {
-  var cells = document.querySelectorAll('.grid .cell')
-
-  for(var i = 0; i < cells.length; i++) {
-    removeOtherColors(cells[i])
-    cells[i].classList.add('white');
-  }
-})
-
 /** Function Declarations **/
 // Remove the other colors from the cell
 function removeOtherColors(el) {
@@ -71,6 +55,3 @@ function removeOtherSelected() {
 /** Main logic **/
 // Select the white color as it is the default
 whiteNode.classList.add('selected')
-
-// Unhide the secret section
-formSectionNode.classList.remove('hidden')
