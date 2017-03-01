@@ -15,7 +15,7 @@ var selectedColor = 'white'
 var clear = document.querySelector('#clear')
 
 // Grab the secret hidden form
-// var formSectionNode = document.querySelector('section.submit')
+var formSectionNode = document.querySelector('section.submit')
 
 /** Event Listeners **/
 // Select the color that we want to paint with
@@ -73,4 +73,4 @@ function removeOtherSelected() {
 whiteNode.classList.add('selected')
 
 // Unhide the secret section
-// formSectionNode.classList.remove('hidden')
+formSectionNode.classList.remove('hidden')
